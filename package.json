@@ -1,0 +1,24 @@
+{
+  "name": "websocket-test-serverless",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jeevantk/websocket-test-serverless.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jeevantk/websocket-test-serverless/issues"
+  },
+  "homepage": "https://github.com/Jeevantk/websocket-test-serverless#readme",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "dotenv": "^8.2.0",
+    "websocket": "^1.0.32"
+  }
+}
