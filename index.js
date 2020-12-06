@@ -22,16 +22,7 @@ client.on('connect', (connection) => {
     });
     connection.on('message', (message) => {
         const content = JSON.parse(message.utf8Data);
-        switch (content.action) {
-            case 'PING':
-                console.log('Keeping alive');
-                break;
-            case 'GREETING':
-                console.log(content.value);
-                break;
-            default:
-                console.error('Unsupported response', content);
-        }
+        console.log('new message recieved ',content);
     });
 
     // Websockets usually timeout and close automatically after being
