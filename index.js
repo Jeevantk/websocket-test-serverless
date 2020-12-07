@@ -3,6 +3,7 @@
 require('dotenv').config();
 const axios = require('axios');
 const WebsocketClient = require('websocket').client;
+const { v4: uuidv4 } = require('uuid');
 
 // Websocket client configuration
 const client = new WebsocketClient();
@@ -31,11 +32,16 @@ client.on('connect', (connection) => {
     const ping = () => {
         if (connection.connected) {
             // console.log('Pinging!');
-            const pingMessage = {
-                action: 'PING'
+            let newMessageId = uuidv4();
+            const newMessage = {
+                conversationId: conversationId,
+                messageId: newMessageId,
+                content: 'this is a new random message at '+ new Date().toISOString(),
+                createdAt: new Date().toISOString(),
+                action: 'message'
             };
-            connection.sendUTF(JSON.stringify(pingMessage));
-            setTimeout(ping, 30000);
+            connection.sendUTF(JSON.stringify(newMessage));
+            setTimeout(ping, 2000);
         }
     };
 
@@ -62,6 +68,7 @@ client.on('connect', (connection) => {
 
 const token = process.env.TOKEN;
 const host = process.env.WS_HOST;
+const conversationId = process.env.CONVO_ID;
 console.log(process.argv);
 
 if (process.argv.length < 4) {
@@ -80,7 +87,7 @@ if (process.argv.length < 4) {
 const instance = process.argv[2];
 const event = process.argv[3];
 const greets = process.argv.length > 4 ? process.argv[4] : false;
-
+console.log('host ',host);
 try{
   client.connect(`${host}?connectionType=${event}&Authorizer=${token}`);
 }
